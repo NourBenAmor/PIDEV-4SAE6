@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -112,7 +113,6 @@ public class CharityEvent implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	
 	public CharityEvent(int id, Date datee, int nbparticipant, int nbplace, String titre, String description,
 			tn.esprit.spring.entities.Cagnotte cagnotte, Set<tn.esprit.spring.entities.Reservation> reservation) {
 		super();
@@ -156,6 +156,5 @@ public class CharityEvent implements Serializable {
 		this.titre = titre;
 		this.description = description;
 	}
-	
 	
 }

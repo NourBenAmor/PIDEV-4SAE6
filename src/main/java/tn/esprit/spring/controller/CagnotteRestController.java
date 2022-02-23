@@ -25,15 +25,14 @@ public class CagnotteRestController {
 		return listCagnottes;
 	}
 	
-	// http://localhost:8089/SpringMVC/cagnotte/get-cagnotte/8
-	@ApiOperation(value = "Récupérer une cagnotte avec son Id")
-	@GetMapping(value = "getAllCagnotte")
-
-    public List<Cagnotte> getAllCagnotte(){
-	return cagnotteService.getAllCagnotte();
-	
+	// http://localhost:8089/SpringMVC/cagnotte/getCagnotte_by_ID/{idCagnotte}
+		@ApiOperation(value = "Récupérer une cagnotte avec son Id")
+		@GetMapping("/getCagnotte_by_ID/{idCagnotte}")
+		public Optional<Cagnotte> getCagnotte_by_ID(@PathVariable("idCagnotte")int idCagnotte) {
+			return cagnotteService.getCagnotte_by_ID(idCagnotte);
 	}
-	
+	 //http://localhost:8089/SpringMVC/cagnotte/add-cagnotte
+
 	@ApiOperation(value = "Ajouter une cagnotte à la base de données")
 	@PostMapping("/add-cagnotte")
 	public Cagnotte addCagnotte(@RequestBody Cagnotte c) {
@@ -41,9 +40,9 @@ public class CagnotteRestController {
 		return cagnotte;	
 		}
 	
-	// http://localhost:8089/SpringMVC/cagnotte/delete-cagnotte/{id-cagnotte}
+	// http://localhost:8089/SpringMVC/cagnotte/delete-cagnotte/{idCagnotte}
 	@ApiOperation(value = "Supprimer le cagnotte d'Id en question de la base de données")
-	@DeleteMapping("/delete-cagnotte/{id-cagnotte}")
+	@DeleteMapping("/delete-cagnotte/{idCagnotte}")
 	@ResponseBody
 	public void deleteCagnotte(@PathVariable("idCagnotte")int idCagnotte){
 		   cagnotteService.deleteCagnotte(idCagnotte);

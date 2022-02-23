@@ -24,8 +24,6 @@ public class Cagnotte implements Serializable {
 	private String nameCagnotte;
 	private int amountCagnotte ;
 	private String Email;
-	private String name;
-	
 	@OneToOne(mappedBy="Cagnotte")
 	@JsonIgnore
 	private CharityEvent CharityEvent;
@@ -62,8 +60,6 @@ public class Cagnotte implements Serializable {
 		CharityEvent = charityEvent;
 	}
 	
-	
-
 	public String getEmail() {
 		return Email;
 	}
@@ -72,20 +68,10 @@ public class Cagnotte implements Serializable {
 		Email = email;
 	}
 	
-	
-	
-	
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	
 
+	
 	public Cagnotte() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -125,10 +111,7 @@ public class Cagnotte implements Serializable {
 		
 	}
 
-	public int getFileName() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 
 	
 }

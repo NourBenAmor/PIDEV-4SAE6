@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.entities.CharityEvent;
 import tn.esprit.spring.entities.Reservation;
+import tn.esprit.spring.entities.User;
 import tn.esprit.spring.repository.ICharityEventRepository;
 
 import tn.esprit.spring.repository.IReservationRepository;

@@ -11,7 +11,6 @@ void deleteEvent(int id);
 	
 	CharityEvent addEvent(CharityEvent e);
 	
-	
 	int getNombrePlacesEvent(int idevent);
 
 	int getNombreParticpEvent(int idevent);
