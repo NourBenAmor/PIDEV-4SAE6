@@ -1,5 +1,6 @@
 package tn.Pi.Controlleur;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,23 +15,36 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import tn.Pi.Service.IServiceYasmine;
+import tn.Pi.Repository.UserRepository;
+import tn.Pi.Service.EmailSenderService;
+import tn.Pi.Service.IServiceFormation;
+import tn.Pi.Service.ServiceUser;
+import tn.Pi.entities.BestWorstTrainig;
 import tn.Pi.entities.Certifact;
 import tn.Pi.entities.Training;
 import tn.Pi.entities.User;
+import tn.Pi.entities.UserTraining;
 
 
 @RestController
 @RequestMapping("/Formations")
 public class EspaceFormationController {
 	@Autowired
-	IServiceYasmine se;
+	IServiceFormation se;
+	@Autowired
+	EmailSenderService service;
+	List<User> users = new ArrayList<>();
+	@Autowired
+	UserRepository su;
 	
 	@PostMapping("/add")
 	public void ajouterFormateur(@RequestBody Training formation) {
 		se.ajouterFormation(formation);
+		for(User u: users)
+		{
+			service.sendSimpleEmail(su.getemailuser(), "bonjour", "teseiufgalfyulaft ");
+		}		
 	}
-	 
 	@GetMapping("/getFormation")
 	public List<Training>getform()
 	{
@@ -70,4 +84,42 @@ public class EspaceFormationController {
         return se.ModifierCertificat(cer, idCertificat);
     }
 	
+	
+	
+	///
+		@PutMapping("/liket")
+		public void LikeTraining(@RequestParam("idFormation") Long idFormation , @RequestParam("id") Long id)
+		{	
+			 se.likeAtraining(idFormation, id);
+			
+		}
+		
+		
+
+
+		@PutMapping("/disLiket")
+		public void DisLikeTraining( @RequestParam("idFormation") Long idFormation , @RequestParam("id") Long id)
+		{	 
+			se.dislikeTraining(idFormation, id);
+		
+	    }
+		
+		
+		
+
+		@GetMapping("/getbesttrainig")
+		public BestWorstTrainig getBestTraining(){
+			return se.besttraining();
+		}
+		
+		
+			@GetMapping("/getworstpost")
+			public BestWorstTrainig getWorstTraining(){
+				return se.worsttraining();
+			}
+			@GetMapping("/searchbyname/{name}")
+			public List<UserTraining> searchByName ( @PathVariable("name") String name)
+			{
+				return se.searchbyname(name);
+			}
 } 

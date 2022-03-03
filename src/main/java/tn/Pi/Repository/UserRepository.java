@@ -15,5 +15,9 @@ public interface UserRepository extends JpaRepository<User,Long> {
 	@Query("Select u from User u where u.isDeleted= 0")
 	public List<User>getUndeletedUser();
 
+
+	@Query("Select email from User")
+	public String getemailuser();
+
 	
 }
