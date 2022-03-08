@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +16,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -93,6 +95,19 @@ public class User implements Serializable,UserDetails{
 	private Date birthDate;
 	@NonNull
 	private Integer age;
+	
+	
+	//---------------------Ayoub Relations------------------
+	@OneToMany (mappedBy = "Nomducandidat")
+	private List<Candidature> candidatures;
+	@OneToMany (mappedBy = "user")
+	private List<Rendez_vous>Rendez_vous;
+	@ManyToMany
+	private List<Offre> offres;
+	
+	@ManyToMany
+	private List<Interest> interests;
+	
 	//-----------------userDetails--------------------------
 	
 	@Override

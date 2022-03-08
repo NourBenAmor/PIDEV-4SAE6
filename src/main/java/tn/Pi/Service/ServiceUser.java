@@ -43,7 +43,6 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import tn.Pi.Repository.UserRepository;
 import tn.Pi.entities.ConfirmationToken;
-import tn.Pi.entities.RegistrationRequest;
 import tn.Pi.entities.User;
 import tn.Pi.entities.UserRole;
 
