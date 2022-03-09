@@ -11,6 +11,7 @@ import tn.Pi.entities.User;
 
 
 
+
 @Service
 public class PostServiceImp implements PostService {
 
@@ -77,6 +78,12 @@ public class PostServiceImp implements PostService {
 	public List<Post> search(String text)
 	{
 		return postRepository.findByDescriptionContaining(text);
+	}
+	
+	@Override 
+	public Post findById(Long id)
+	{
+		return postRepository.findById(id).orElse(null);
 	}
 	
 }

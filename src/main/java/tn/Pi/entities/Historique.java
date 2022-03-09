@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Historique {
@@ -15,7 +16,7 @@ public class Historique {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idHistorique;
 	private String search;
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToOne(fetch=FetchType.EAGER)
 	private User user;
 	

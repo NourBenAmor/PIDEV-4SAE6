@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -17,7 +18,7 @@ public class Rate {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idRate;
 	private float stars;
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Post post;
 	
@@ -28,7 +29,7 @@ public class Rate {
 	
 
 
-	public Rate(float stars, Post post) {
+	public Rate(float stars,Post post) {
 		super();
 		this.stars = stars;
 		this.post = post;

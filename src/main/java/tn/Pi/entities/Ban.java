@@ -10,12 +10,15 @@ import javax.persistence.Id;
 
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Ban {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idBan;
+	@JsonIgnore
 	@OneToOne
 	private User user;
 	private boolean status;

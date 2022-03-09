@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Message {
@@ -14,8 +16,10 @@ public class Message {
 	private Long idMessage;
 	private String message;
 	private String file;
+	@JsonIgnore
 	@ManyToOne
 	private User sender;
+	@JsonIgnore
 	@ManyToOne
 	private User receiver;
 	

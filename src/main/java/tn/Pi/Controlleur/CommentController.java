@@ -24,10 +24,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sun.xml.messaging.saaj.packaging.mime.internet.ParseException;
 
 import tn.Pi.Service.CommentService;
-import tn.Pi.Service.ServiceUser;
 import tn.Pi.entities.Comment;
 import tn.Pi.entities.Post;
 import tn.Pi.entities.User;
+
+
 
 
 @RestController
@@ -35,8 +36,6 @@ public class CommentController {
 
 	@Autowired
 	CommentService commentService;
-	@Autowired
-	ServiceUser userService;
 	
 	@RequestMapping("/showCreateCom")
 	public String showCreate()

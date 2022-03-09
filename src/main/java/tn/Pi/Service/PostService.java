@@ -18,4 +18,5 @@ public interface PostService {
 	String testStars(float stars);
 	List<Post> getPostsByUser(User u);
 	List<Post> search(String text);
+	Post findById(Long id);
 }

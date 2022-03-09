@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -24,11 +25,16 @@ public class Comment {
 	private String description;
 	private Date creationDate;
 	private String file;
-	@JsonBackReference
+	
+	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Post post;
+	
+	@JsonIgnore
 	@OneToMany (mappedBy = "comment")
 	private List<Reaction> reactions;
+	
+	@JsonIgnore
 	@ManyToOne
 	private User user;
 	public Comment() {

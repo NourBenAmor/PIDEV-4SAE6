@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,16 +25,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import tn.Pi.entities.Ban;
-import tn.Pi.entities.Historique;
-import tn.Pi.entities.Post;
-import tn.Pi.entities.User;
+import tn.Pi.Repository.UserRepository;
 import tn.Pi.Service.BadWordsFilter;
 import tn.Pi.Service.BanService;
 import tn.Pi.Service.FileUploadService;
 import tn.Pi.Service.HistoriqueService;
 import tn.Pi.Service.PostService;
 import tn.Pi.Service.RateService;
+import tn.Pi.entities.Ban;
+import tn.Pi.entities.Historique;
+import tn.Pi.entities.Post;
+import tn.Pi.entities.User;
+
 
 
 
@@ -50,7 +53,8 @@ public class PostController {
 	BanService banservice;
 	@Autowired
 	HistoriqueService historiqueService;
-	
+	@Autowired
+	UserRepository userRepos;
 	@RequestMapping("/showCreate")
 	public String showCreate()
 	{
@@ -72,17 +76,24 @@ public class PostController {
 				
 				// converting ZonedDateTime to Date using Date.from() and ZonedDateTime.toInstant()
 				Date dateCreation = Date.from(zonedDateTime.toInstant());
-		User currentuser = new User();
-		Long id = (long) 1;
+		User currentuser = userRepos.findById((long)1).orElse(null);
+		Ban ban=banservice.getBanByUser(currentuser);
+		
+		if(ban!=null)
+		{
+		if(ban.getEndBan().compareTo(dateCreation)<0)
+		{
 		post.setDescription(description);
 		//file upload
 		fileupload.uploadfile(file);
 		post.setFile(file.getOriginalFilename());
-		currentuser.setIdUser(id);
 		post.setUser(currentuser);
         post.setDateDeCreation(dateCreation);
 		postService.savePost(post);
-		return "Post created!";
+		return "post created!";
+		}
+		}
+		return "Oops , seems like u are banned from creating a post until " + ban.getEndBan();
 	}
 	
 	
@@ -283,3 +294,35 @@ public class PostController {
 	}
 
 }
+
+
+	/*
+	@PostMapping("/chatBot")
+	public String chat(@RequestParam("reponse") String reponse)
+	{
+		
+		if(reponse.equals("Hi"))
+		{
+			question="whats your case ?\nKidnaping\nMental HealthCare";
+			return question;
+		}
+		
+		if (question.equals("whats your case ?\nKidnaping\nMental HealthCare" ))
+		{
+			if(reponse.equals("Kidnaping"))
+			{
+				question="do u want to contact an expert?-the police-";
+				return question;
+			}
+			else if(reponse.equals("Mental HealthCare"))
+			{
+				question="do u want to contact an expert?-Psychotherapy-";	
+				return question;				}
+			}	
+		
+		return "write something!";
+		
+	}
+
+}
+*/

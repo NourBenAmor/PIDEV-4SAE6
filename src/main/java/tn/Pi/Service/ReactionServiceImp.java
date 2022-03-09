@@ -6,13 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.Pi.entities.Reaction;
-import tn.Pi.Repository.ReactionRepository;
+
+
 
 @Service
 public class ReactionServiceImp implements ReactionService {
 
 	@Autowired
-	ReactionRepository ReactionRepository;
+	tn.Pi.Repository.ReactionRepository ReactionRepository;
 	
 	@Override
 	public Reaction saveReaction(Reaction r) {

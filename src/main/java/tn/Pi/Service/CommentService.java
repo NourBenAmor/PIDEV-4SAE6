@@ -6,6 +6,10 @@ import tn.Pi.entities.Comment;
 
 
 
+
+
+
+
 public interface CommentService {
 
 	Comment saveComment(Comment c);

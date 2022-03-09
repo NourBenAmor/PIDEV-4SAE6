@@ -9,7 +9,6 @@ import tn.Pi.entities.Historique;
 import tn.Pi.entities.User;
 
 
-
 @Service
 public class HistoriqueServiceImp implements HistoriqueService {
 

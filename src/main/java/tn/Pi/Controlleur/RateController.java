@@ -31,6 +31,8 @@ public class RateController {
 	RateService rateService;
 	@Autowired
 	PostService postservice;
+	
+
 	@RequestMapping("/showCreateRate")
 	public String showCreate()
 	{
@@ -40,7 +42,8 @@ public class RateController {
 	@PostMapping("/saveRate")
 	public String saveRate(@RequestBody Rate rate,@RequestParam Long idPost)
 	{
-		Post p = new Post(idPost);
+		Post p = postservice.findById(idPost);
+		p.setIdPost(idPost);
 		rate.setPost(p);
 		rateService.saveRate(rate);
 		return "rate added!";
@@ -71,7 +74,7 @@ public class RateController {
 	@PutMapping("/updateRate")
 	public String updateRate(@RequestBody Rate rate,@RequestParam Long idPost) 
 	{
-		Post p = new Post(idPost);
+		Post p =postservice.findById(idPost);
 		rate.setPost(p);
 		rateService.updateRate(rate);
 		return "rate updated";

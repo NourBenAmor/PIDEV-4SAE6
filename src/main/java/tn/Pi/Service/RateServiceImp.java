@@ -11,6 +11,7 @@ import tn.Pi.entities.Rate;
 
 
 
+
 @Service
 public class RateServiceImp implements RateService{
 

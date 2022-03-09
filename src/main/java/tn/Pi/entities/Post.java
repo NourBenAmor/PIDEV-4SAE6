@@ -13,12 +13,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+
 
 /**
  * @author seyko
  *
  */
+
 
 @Entity
 public class Post {
@@ -30,22 +34,17 @@ public class Post {
 	private String description;
 	private String file;
 	private Date dateDeCreation;
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY)
 	private User user;
-	@JsonManagedReference
+	@JsonIgnore
 	@OneToMany (cascade=CascadeType.ALL, fetch=FetchType.LAZY,mappedBy = "post")
 	private List<Comment> comments;
 	
-	@JsonManagedReference
+	@JsonIgnore
 	@OneToMany (cascade=CascadeType.ALL, fetch=FetchType.LAZY,mappedBy = "post")
 	private List<Rate> rates;
 	
-	public Post() {
-		super();
-	}
-
-
 
 	public Post(String description, String file, Date dateDeCreation, User user, List<Comment> comments,
 			List<Rate> rates) {
@@ -57,6 +56,13 @@ public class Post {
 		this.comments = comments;
 		this.rates = rates;
 	}
+
+	
+	public Post() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 
 	public Post(Long id)
 	{

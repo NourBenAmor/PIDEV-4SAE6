@@ -8,7 +8,6 @@ import tn.Pi.entities.Post;
 import tn.Pi.entities.Rate;
 
 
-
 public interface RateRepository extends JpaRepository<Rate, Long> {
 
 	List<Rate> findByPost(Post p);
