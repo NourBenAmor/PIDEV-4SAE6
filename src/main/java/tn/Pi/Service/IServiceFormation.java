@@ -1,6 +1,7 @@
 package tn.Pi.Service;
 
 import java.util.List;
+import java.util.Map;
 
 import tn.Pi.entities.BestWorstTrainig;
 import tn.Pi.entities.Certifact;
@@ -18,9 +19,11 @@ public interface IServiceFormation {
 	public Certifact ModifierCertificat(Certifact c,Long id);
 	public void supprimerCertificat(Long id);
 	public List<Certifact> ListedesCertificat();
-	public void dislikeTraining(Long idFormation, Long id);
-	public void likeAtraining(Long idFormation , Long id);
+	//public void dislikeTraining(Long idFormation, Long id);
+	//public void likeAtraining(Long idFormation , Long id);
 	public BestWorstTrainig besttraining();	
 	public BestWorstTrainig worsttraining();
 	public List<UserTraining> searchbyname(String name);
+	public void pdf(Long id);
+	public List<Training> searchTraining(String word);
 }

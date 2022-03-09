@@ -1,9 +1,11 @@
 package tn.Pi.Controlleur;
 
-import java.util.ArrayList;
+
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,36 +16,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import tn.Pi.Repository.UserRepository;
-import tn.Pi.Service.EmailSenderService;
+import tn.Pi.Repository.RepoCertificat;
 import tn.Pi.Service.IServiceFormation;
-import tn.Pi.Service.ServiceUser;
 import tn.Pi.entities.BestWorstTrainig;
 import tn.Pi.entities.Certifact;
 import tn.Pi.entities.Training;
-import tn.Pi.entities.User;
 import tn.Pi.entities.UserTraining;
-
 
 @RestController
 @RequestMapping("/Formations")
 public class EspaceFormationController {
+	
 	@Autowired
 	IServiceFormation se;
+	//@Autowired
+	//UserRepository su;
 	@Autowired
-	EmailSenderService service;
-	List<User> users = new ArrayList<>();
-	@Autowired
-	UserRepository su;
+	RepoCertificat rc;
 	
 	@PostMapping("/add")
 	public void ajouterFormateur(@RequestBody Training formation) {
 		se.ajouterFormation(formation);
-		for(User u: users)
-		{
-			service.sendSimpleEmail(su.getemailuser(), "bonjour", "teseiufgalfyulaft ");
-		}		
+				
 	}
 	@GetMapping("/getFormation")
 	public List<Training>getform()
@@ -87,39 +81,52 @@ public class EspaceFormationController {
 	
 	
 	///
-		@PutMapping("/liket")
+	/*	@PutMapping("/liket")
 		public void LikeTraining(@RequestParam("idFormation") Long idFormation , @RequestParam("id") Long id)
 		{	
 			 se.likeAtraining(idFormation, id);
 			
-		}
+		}*/
 		
 		
-
+/*
 
 		@PutMapping("/disLiket")
 		public void DisLikeTraining( @RequestParam("idFormation") Long idFormation , @RequestParam("id") Long id)
 		{	 
 			se.dislikeTraining(idFormation, id);
 		
-	    }
+	    }*/
 		
 		
 		
-
+		@PutMapping("/pdf")
+		public void pdf(@RequestParam("idCertificat")Long id)
+		{
+		se.pdf(id);
+   		
+		}
 		@GetMapping("/getbesttrainig")
 		public BestWorstTrainig getBestTraining(){
 			return se.besttraining();
+		} 
+		
+		
+		@GetMapping("/getworstpost")
+		public BestWorstTrainig getWorstTraining(){
+		return se.worsttraining();
 		}
-		
-		
-			@GetMapping("/getworstpost")
-			public BestWorstTrainig getWorstTraining(){
-				return se.worsttraining();
-			}
-			@GetMapping("/searchbyname/{name}")
-			public List<UserTraining> searchByName ( @PathVariable("name") String name)
-			{
-				return se.searchbyname(name);
-			}
+		@GetMapping("/searchbyname/{name}")
+		public List<UserTraining> searchByName ( @PathVariable("name") String name)
+		{
+			return se.searchbyname(name);
+		}
+		@GetMapping("/search/{word}")
+		List<Training> search(@PathVariable("word") String word)
+		{
+			return se.searchTraining(word);
+		}
+		   	
+		   	
 } 
+

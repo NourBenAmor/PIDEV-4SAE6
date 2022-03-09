@@ -8,21 +8,28 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.FieldDefaults;
+
+@Entity
 @Getter
 @Setter
-@EqualsAndHashCode
 @NoArgsConstructor
-@Entity
-public class Rating implements Serializable {
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class Response implements Serializable{
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private long id;
-	private float rate;
-	@ManyToOne
-	Publication publication;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long idR;
+	private String textR;
 
 }
+
